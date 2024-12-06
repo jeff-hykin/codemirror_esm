@@ -2,11 +2,17 @@
 
 ```js
 import CM from './main.js'
+import atomOne from "./themes/atomone.js"
+import dracula from "./themes/dracula.js"
 
 const { basicSetup } = CM["codemirror"]
 const { EditorView, keymap } = CM["@codemirror/view"]
 const { EditorState, Prec } = CM["@codemirror/state"]
 const { javascript } = CM["@codemirror/lang-javascript"]
+const { tags: t } = CM['@lezer/highlight']
+const { themeToExtension } = CM["@jeff-hykin/theme-tools"]
+
+//  NOTE: all of @uiw/codemirror-theme's have been ported to ./themes
 
 const parent = document.createElement("div")
 let editor = new EditorView({
@@ -15,7 +21,28 @@ let editor = new EditorView({
         doc: `console.log("Hello World!") // inital text of the editor`,
         extensions: [
             basicSetup, // ctrl+z = undo, and other stuff like that
-            javascript(), // hilighting
+            javascript(), // highlighting hooks
+            
+            // 
+            // theme choice
+            // 
+            themeToExtension(
+                atomOne({
+                    variant:"dark", // "light" | "dark"
+                    settings:{
+                        // can override defaults:
+                        // background: 'hsl(286, 60%, 67%)',
+                        // foreground: 'hsl(286, 60%, 67%)',
+                        // caret: '#e06c75',
+                        // selection: '#e06c75',
+                        // lineHighlight: '#e06c75',
+                        // gutterBackground: '#e06c75',
+                        // gutterForeground: '#e06c75',
+                    },
+                    styles:[], // styles to add to the theme
+                    mutateThemeStyles:(style)=>style, // return null to remove a style entry from the theme
+                })
+            ),
             
             //
             // example: define your own keybinding
@@ -58,6 +85,9 @@ let editor = new EditorView({
 ## Whats Available?
 
 ```js
+CM["@lezer/lr"]
+CM["@lezer/common"]
+CM["@lezer/highlight"]
 CM["@codemirror/state"]
 CM["@codemirror/view"]
 CM["@codemirror/merge"]
