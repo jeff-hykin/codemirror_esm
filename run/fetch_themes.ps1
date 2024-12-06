@@ -7,14 +7,35 @@ import { run, hasCommand, throwIfFails, zipInto, mergeInto, returnAsString, Time
 import { Console, clearAnsiStylesFrom, black, white, red, green, blue, yellow, cyan, magenta, lightBlack, lightWhite, lightRed, lightGreen, lightBlue, lightYellow, lightMagenta, lightCyan, blackBackground, whiteBackground, redBackground, greenBackground, blueBackground, yellowBackground, magentaBackground, cyanBackground, lightBlackBackground, lightRedBackground, lightGreenBackground, lightYellowBackground, lightBlueBackground, lightMagentaBackground, lightCyanBackground, lightWhiteBackground, bold, reset, dim, italic, underline, inverse, strikethrough, gray, grey, lightGray, lightGrey, grayBackground, greyBackground, lightGrayBackground, lightGreyBackground, } from "https://deno.land/x/quickr@0.6.72/main/console.js"
 import { capitalize, indent, toCamelCase, digitsToEnglishArray, toPascalCase, toKebabCase, toSnakeCase, toScreamingKebabCase, toScreamingSnakeCase, toRepresentation, toString, regex, findAll, iterativelyFindAll, escapeRegexMatch, escapeRegexReplace, extractFirst, isValidIdentifier, removeCommonPrefix } from "https://deno.land/x/good@1.13.1.0/string.js"
 
-function reformattedTheme(url, name) {
-    return fetch(url)
+async function reformattedTheme(name) {
+    let [actualName, lightOrDark] = name.split("/")
+    // edgecase 
+    if (actualName=="gruvbox") {
+        actualName=`gruvbox-dark`
+    }
+    let url = `https://cdn.jsdelivr.net/npm/@uiw/codemirror-theme-${actualName}@4.23.6/esm/index.js`
+    if (lightOrDark) {
+        url = `https://cdn.jsdelivr.net/npm/@uiw/codemirror-theme-${actualName}@4.23.6/esm/${lightOrDark}.js`
+    }
+    let result
+    try {
+        result = await fetch(url)
+        if (!result.ok) {
+            throw result
+        }
+    } catch (error) {
+        if (lightOrDark) {
+            result = fetch(url.replace(/(light|dark).js$/, "index.js"))
+        }
+    }
+    return Promise.resolve(result)
         .then(r => r.text())
         .then(string => {
             const defaultSettingsString = (string.match(/export var defaultSettings.+(\{(?:a|[^a])*?\n\});/)||{})[1]
-            const styleString = (string.match(/export var \w+[a-z]Style.+(\[(?:a|[^a])*?\n\}?\]);/)||{})[1]
-            if (!defaultSettingsString || !styleString) {
+            const styleString = (string.match(/export var \w+[a-z]Style.+(\[(?:a|[^a])*?\n\}?\]);/)||{})[1]||""
+            if (!defaultSettingsString) {
                 console.warn(`Couldn't find defaultSettings and/or styleString for ${name||url}`)
+                console.debug(`url is:`,url)
                 return
             }
             let extraImport = ""
@@ -87,7 +108,7 @@ const themeNames = [
     "xcode/dark",
 ]
 
-themeNames.map(eachName=>reformattedTheme(`https://cdn.jsdelivr.net/npm/@uiw/codemirror-theme-${eachName}@4.23.6/esm/index.js`).then(each=>each&&FileSystem.write({
+themeNames.map(eachName=>reformattedTheme(eachName).then(each=>each&&FileSystem.write({
     data: each,
     path: `${FileSystem.thisFolder}/../themes/${eachName}.js`,
 })))
