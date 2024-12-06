@@ -1633,6 +1633,9 @@ function flatten(extension, compartments, newCompartments) {
     let result = [[], [], [], [], []]
     let seen = new Map()
     function inner(ext, prec) {
+        if (!ext) {
+            return
+        }
         let known = seen.get(ext)
         if (known != null) {
             if (known <= prec) return
@@ -1641,27 +1644,35 @@ function flatten(extension, compartments, newCompartments) {
             if (ext instanceof CompartmentInstance) newCompartments.delete(ext.compartment)
         }
         seen.set(ext, prec)
+        // recurse on arrays
         if (Array.isArray(ext)) {
             for (let _i19 = 0, _length19 = ext.length; _i19 < _length19; _i19++) {
                 let e = ext[_i19]
                 inner(e, prec)
             }
-        } else if (ext instanceof CompartmentInstance) {
+        } else if (ext instanceof CompartmentInstance||ext.compartment!=null) {
+            // console.debug(`CompartmentInstance ext is:`,ext)
             if (newCompartments.has(ext.compartment)) throw new RangeError(`Duplicate use of compartment in extensions`)
             let content = compartments.get(ext.compartment) || ext.inner
             newCompartments.set(ext.compartment, content)
             inner(content, prec)
-        } else if (ext instanceof PrecExtension) {
+        } else if (ext instanceof PrecExtension||(ext.prec!=null&&ext.inner!=null)) {
+            // console.debug(`PrecExtension ext is:`,ext)
             inner(ext.inner, ext.prec)
-        } else if (ext instanceof StateField) {
+        } else if (ext instanceof StateField||ext.spec!=null) {
+            // console.debug(`StateField ext is:`,ext)
             result[prec].push(ext)
             if (ext.provides) inner(ext.provides, prec)
-        } else if (ext instanceof FacetProvider) {
+        } else if (ext instanceof FacetProvider||ext.facet!=null) {
+            // console.debug(`FacetProvider ext is:`,ext)
             result[prec].push(ext)
             if (ext.facet.extensions) inner(ext.facet.extensions, Prec_.default)
         } else {
             let content = ext.extension
-            if (!content) throw new Error(`Unrecognized extension value in extension set (${ext}). This sometimes happens because multiple instances of @codemirror/state are loaded, breaking instanceof checks.`)
+            if (!content) {
+                console.debug(`ext is:`,ext)
+                throw new Error(`Expected one of CompartmentInstance, PrecExtension, StateField, FacetProvider, Array, {content}\nBut got an object with the following keys:\n${JSON.stringify(Object.keys(ext))}\nUnrecognized extension value in extension set (${ext}).\n\nThis sometimes happens because multiple instances of @codemirror/state are loaded, breaking instanceof checks.`)
+            }
             inner(content, prec)
         }
     }
