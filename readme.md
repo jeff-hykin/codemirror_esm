@@ -1,7 +1,7 @@
 ## Usage
 
 ```js
-import CM from './main.js'
+import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.1.0/main.js"'
 import atomOne from "./themes/atomone.js"
 import dracula from "./themes/dracula.js"
 
