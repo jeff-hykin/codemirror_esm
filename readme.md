@@ -28,6 +28,7 @@ let editor = new EditorView({
             // 
             themeToExtension(
                 atomOne({
+                    // override theme settings
                     settings: {
                         background: "#272C35",
                         foreground: "#9d9b97",
@@ -39,7 +40,7 @@ let editor = new EditorView({
                         gutterBorder: "transparent",
                         lineHighlight: "#2e3f5940",
                     },
-                    // effectively delete any existing red styles
+                    // effectively delete any existing red styles from the theme
                     mutateThemeStyles: (style, tags) => (style.color == "red" ? null : style),
                     // add some new styles
                     styles: (tags) => [
