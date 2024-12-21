@@ -1,9 +1,9 @@
 ## Usage
 
 ```js
-import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.1/main.js'
-import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.1/themes/atom-one-dark.js'
-import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.1/themes/dracula.js'
+import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/main.js'
+import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/atom-one-dark.js'
+import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/dracula.js'
 
 const { basicSetup } = CM["codemirror"]
 const { EditorView, keymap } = CM["@codemirror/view"]
@@ -28,19 +28,30 @@ let editor = new EditorView({
             // 
             themeToExtension(
                 atomOne({
-                    variant:"dark", // "light" | "dark"
-                    settings:{
-                        // can override defaults:
-                        // background: 'hsl(286, 60%, 67%)',
-                        // foreground: 'hsl(286, 60%, 67%)',
-                        // caret: '#e06c75',
-                        // selection: '#e06c75',
-                        // lineHighlight: '#e06c75',
-                        // gutterBackground: '#e06c75',
-                        // gutterForeground: '#e06c75',
+                    settings: {
+                        background: "#272C35",
+                        foreground: "#9d9b97",
+                        caret: "#797977",
+                        selection: "#3d4c64",
+                        selectionMatch: "#3d4c64",
+                        gutterBackground: "#272C35",
+                        gutterForeground: "#465063",
+                        gutterBorder: "transparent",
+                        lineHighlight: "#2e3f5940",
                     },
-                    styles:[], // styles to add to the theme
-                    mutateThemeStyles:(style)=>style, // return null to remove a style entry from the theme
+                    // effectively delete any existing red styles
+                    mutateThemeStyles: (style, tags) => (style.color == "red" ? null : style),
+                    // add some new styles
+                    styles: (tags) => [
+                        {
+                            tag: [t.tagName, t.heading],
+                            color: "#e06c75",
+                        },
+                        {
+                            tag: [t.function(t.variableName), t.function(t.propertyName), t.url, t.processingInstruction],
+                            color: "hsl(207, 82%, 66%)",
+                        },
+                    ],
                 })
             ),
             
