@@ -3,9 +3,11 @@ import { isValidIdentifier } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0
 import CM from '../main.js'
 
 Deno.mkdirSync(`./codemirror/`, { recursive: true })
+let importMap = {}
 for (const [key, value] of Object.entries(CM)) {
     if (key.startsWith("@codemirror/")) {
         const dirName = key.replace(/^@codemirror\//,"")
+        importMap[key] = `./codemirror/${dirName}.js`
         let chunks = [
             `import CM from '../main.js'`,
             `const value = CM[${JSON.stringify(key)}]`,
@@ -19,3 +21,4 @@ for (const [key, value] of Object.entries(CM)) {
         Deno.writeTextFileSync(`./codemirror/${dirName}.js`, chunks.join("\n"))
     }
 }
+console.debug(`importMap is:`,JSON.stringify(importMap,null,2).replace(/\n/g,"\n    "))
