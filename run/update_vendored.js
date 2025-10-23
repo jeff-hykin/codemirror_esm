@@ -58,7 +58,7 @@ var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
 
 Deno.mkdirSync(`./@codemirror/`, { recursive: true })
 for (let each of names) {
-    await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `export * from "./vendored/esm.sh/@codemirror/${each}.js"`, overwrite: true})
+    await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `export * from "../vendored/esm.sh/@codemirror/${each}.js"`, overwrite: true})
 }
 
 var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/@lezer`)
@@ -66,5 +66,5 @@ var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
 
 Deno.mkdirSync(`./@lezer/`, { recursive: true })
 for (let each of names) {
-    await FileSystem.write({path:`${FileSystem.thisFolder}/../@lezer/${each}.js`, data: `export * from "./vendored/esm.sh/@lezer/${each}.js"`, overwrite: true})
+    await FileSystem.write({path:`${FileSystem.thisFolder}/../@lezer/${each}.js`, data: `export * from "../vendored/esm.sh/@lezer/${each}.js"`, overwrite: true})
 }
