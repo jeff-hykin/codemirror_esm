@@ -215,7 +215,7 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
             }
             // not sure why this happens
             if (editor.state.doc?.children instanceof Array) {
-                return editor.state.doc.children.map(each=>each.text).join("\n")
+                return editor.state.doc.children.map(each=>each.text.join("\n")).join("\n")
             }
             return editor.state.doc
         },
