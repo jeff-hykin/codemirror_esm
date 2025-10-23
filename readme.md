@@ -1,9 +1,9 @@
 ## Usage
 
 ```js
-import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/main.js'
-import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/atomone.js'
-import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/dracula.js'
+import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/main.js'
+import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/themes/atomone.js'
+import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/themes/dracula.js'
 
 const { basicSetup } = CM["codemirror"]
 const { EditorView, keymap } = CM["@codemirror/view"]
