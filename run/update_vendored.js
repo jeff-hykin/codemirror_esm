@@ -125,7 +125,7 @@ for (const eachGroup of ["@codemirror/legacy-modes/mode"]) {
         try {
             const exportedThings = await import(`${FileSystem.thisFolder}/../vendored/esm.sh/${eachGroup}/${each}.js`)
             const keys = Object.keys(exportedThings).filter(each=>each != "default")
-            await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `
+            await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/lang-${each}.js`, data: `
                 import { StreamLanguage } from "./language.js"
                 import {${keys.map(eachKey=>`${eachKey} as _${eachKey}`).join(", ")}} from "../vendored/esm.sh/${eachGroup}/${each}.js"
                 ${keys.map(each=>`export const ${each} = StreamLanguage.define(_${each})`).join("\n")}
