@@ -11,6 +11,7 @@ export const { EditorState, Prec } = CM["@codemirror/state"]
 // const { tags: t } = CM['@lezer/highlight']
 export const { themeToExtension } = CM["@jeff-hykin/theme-tools"]
 
+// at the moment: javascript, java, json, cpp, php, python, css, sass, html, sql, rust, xml, markdown, lezer, wast, angular, vue, liquid, less
 export const languages = Object.fromEntries(
     Object.keys(CM).filter(each=>each.startsWith("@codemirror/lang-")).map(each=>{
         const langName = each.replace(/^@codemirror\/lang-/,"")
@@ -50,6 +51,12 @@ export const languages = Object.fromEntries(
  */
 export function createEditor({ language, value, theme, editorState, keymaps, onInput, onChange, ...props } = {}) {
     const parent = document.createElement("div")
+    parent.style.position = "relative"
+    parent.addEventListener("click", (event)=>{
+        if (parent.children.length > 0) {
+            parent.children[0].click()
+        }
+    })
     let extensions = [
         basicSetup,
     ]
@@ -182,5 +189,9 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
             extensions,
         }),
     })
+
+    if (parent.children.length > 0) {
+        parent.children[0].style.minHeight = "100%"
+    }
     return parent
 }
