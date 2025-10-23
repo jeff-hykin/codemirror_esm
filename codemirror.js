@@ -13859,7 +13859,7 @@ const language = Facet.define({
         }),
     ],
 })
-class LanguageSupport {
+export class LanguageSupport {
     constructor(language, support = []) {
         this.language = language
         this.support = support
