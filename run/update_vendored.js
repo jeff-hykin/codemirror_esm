@@ -77,20 +77,16 @@ await FileSystem.write({path:`${FileSystem.thisFolder}/../vendored/node.js/proce
 
 
 // 
-// generate codemirror folder
+// generate helper folders
 // 
-var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/@codemirror`)
-var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
-
-Deno.mkdirSync(`./@codemirror/`, { recursive: true })
-for (let each of names) {
-    await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `export * from "../vendored/esm.sh/@codemirror/${each}.js"`, overwrite: true})
-}
-
-var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/@lezer`)
-var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
-
-Deno.mkdirSync(`./@lezer/`, { recursive: true })
-for (let each of names) {
-    await FileSystem.write({path:`${FileSystem.thisFolder}/../@lezer/${each}.js`, data: `export * from "../vendored/esm.sh/@lezer/${each}.js"`, overwrite: true})
+for (const eachGroup of ["@codemirror","@lezer","@replit","@langchain","@cookshack"]) {
+    var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/${eachGroup}`)
+    var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
+    Deno.mkdirSync(`./${eachGroup}/`, { recursive: true })
+    for (let each of names) {
+        if (eachGroup != "@codemirror" && each.includes("-lang-")) {
+            await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each.replace(/(.+)-lang-(.+)/g,"lang-$2")}.js`, data: `export * from "../vendored/esm.sh/${eachGroup}/${each}.js"`, overwrite: true})
+        }
+        await FileSystem.write({path:`${FileSystem.thisFolder}/../${eachGroup}/${each}.js`, data: `export * from "../vendored/esm.sh/${eachGroup}/${each}.js"`, overwrite: true})
+    }
 }
