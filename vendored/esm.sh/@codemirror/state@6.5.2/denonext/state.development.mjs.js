@@ -1049,8 +1049,8 @@ function Ue(s, e, t) {
         else {
             let a = l.extension
             if (!a) {
-                console.debug(`a is:`,a)
-                console.debug(`a.constructor.name is:`,a.constructor.name)
+                console.debug(`l is:`,l)
+                console.debug(`l.constructor.name is:`,l.constructor.name)
                 throw new Error(`Unrecognized extension value in extension set (${l}). This sometimes happens because multiple instances of @codemirror/state are loaded, breaking instanceof checks.`)
             }
             r(a, h)
