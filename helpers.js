@@ -53,8 +53,9 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
     const parent = document.createElement("div")
     parent.style.position = "relative"
     parent.addEventListener("click", (event)=>{
+        // TODO: ensure that this only activates if nothing else takes priority
         if (parent.children.length > 0) {
-            parent.children[0].click()
+            parent.querySelector(".cm-scroller").focus()
         }
     })
     let extensions = [
