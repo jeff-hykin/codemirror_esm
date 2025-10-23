@@ -209,7 +209,16 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
     let editor
     // .value
     Object.defineProperty(parent, "value", {
-        get: () => editor.state.doc.children.map(each=>each.text).join("\n"),
+        get: () => {
+            if (editor.state.doc?.text instanceof Array) {
+                return editor.state.doc.text.join("\n")
+            }
+            // not sure why this happens
+            if (editor.state.doc?.children instanceof Array) {
+                return editor.state.doc.children.map(each=>each.text).join("\n")
+            }
+            return editor.state.doc
+        },
         set: (value) => {
             editor.dispatch({
                 changes: {
