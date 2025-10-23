@@ -209,7 +209,7 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
     let editor
     // .value
     Object.defineProperty(parent, "value", {
-        get: () => editor.state.doc.text.join("\n"),
+        get: () => editor.state.doc.children.map(each=>each.text).join("\n"),
         set: (value) => {
             editor.dispatch({
                 changes: {
