@@ -1,0 +1,32 @@
+import CM from '../main.js'
+const value = CM["@codemirror/state"]
+export default value
+export const Annotation = value.Annotation
+export const AnnotationType = value.AnnotationType
+export const ChangeDesc = value.ChangeDesc
+export const ChangeSet = value.ChangeSet
+export const CharCategory = value.CharCategory
+export const Compartment = value.Compartment
+export const EditorSelection = value.EditorSelection
+export const EditorState = value.EditorState
+export const Facet = value.Facet
+export const Line = value.Line
+export const MapMode = value.MapMode
+export const Prec = value.Prec
+export const Range = value.Range
+export const RangeSet = value.RangeSet
+export const RangeSetBuilder = value.RangeSetBuilder
+export const RangeValue = value.RangeValue
+export const SelectionRange = value.SelectionRange
+export const StateEffect = value.StateEffect
+export const StateEffectType = value.StateEffectType
+export const StateField = value.StateField
+export const Text = value.Text
+export const Transaction = value.Transaction
+export const codePointAt = value.codePointAt
+export const codePointSize = value.codePointSize
+export const combineConfig = value.combineConfig
+export const countColumn = value.countColumn
+export const findClusterBreak = value.findClusterBreak
+export const findColumn = value.findColumn
+export const fromCodePoint = value.fromCodePoint

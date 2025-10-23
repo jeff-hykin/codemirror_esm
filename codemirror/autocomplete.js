@@ -1,0 +1,33 @@
+import CM from '../main.js'
+const value = CM["@codemirror/autocomplete"]
+export default value
+export const CompletionContext = value.CompletionContext
+export const acceptCompletion = value.acceptCompletion
+export const autocompletion = value.autocompletion
+export const clearSnippet = value.clearSnippet
+export const closeBrackets = value.closeBrackets
+export const closeBracketsKeymap = value.closeBracketsKeymap
+export const closeCompletion = value.closeCompletion
+export const completeAnyWord = value.completeAnyWord
+export const completeFromList = value.completeFromList
+export const completionKeymap = value.completionKeymap
+export const completionStatus = value.completionStatus
+export const currentCompletions = value.currentCompletions
+export const deleteBracketPair = value.deleteBracketPair
+export const hasNextSnippetField = value.hasNextSnippetField
+export const hasPrevSnippetField = value.hasPrevSnippetField
+export const ifIn = value.ifIn
+export const ifNotIn = value.ifNotIn
+export const insertBracket = value.insertBracket
+export const insertCompletionText = value.insertCompletionText
+export const moveCompletionSelection = value.moveCompletionSelection
+export const nextSnippetField = value.nextSnippetField
+export const pickedCompletion = value.pickedCompletion
+export const prevSnippetField = value.prevSnippetField
+export const selectedCompletion = value.selectedCompletion
+export const selectedCompletionIndex = value.selectedCompletionIndex
+export const setSelectedCompletion = value.setSelectedCompletion
+export const snippet = value.snippet
+export const snippetCompletion = value.snippetCompletion
+export const snippetKeymap = value.snippetKeymap
+export const startCompletion = value.startCompletion
