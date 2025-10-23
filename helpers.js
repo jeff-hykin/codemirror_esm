@@ -1,22 +1,29 @@
-import CM from './main.js'
+// import CM from './main.js'
 import atomOne from './themes/atomone.js'
 import { passAlongProps } from "https://esm.sh/gh/jeff-hykin/elemental@0.6.5/main/deno.js"
 import { isPureObject } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0/source/flattened/is_pure_object.js'
 
-export const { basicSetup } = CM["codemirror"]
-export const { EditorView, keymap } = CM["@codemirror/view"]
-export const { EditorState, EditorSelection, Prec } = CM["@codemirror/state"]
+// export const { basicSetup } = CM["codemirror"]
+// export const { EditorView, keymap } = CM["@codemirror/view"]
+// export const { EditorState, EditorSelection, Prec } = CM["@codemirror/state"]
 // const { javascript } = CM["@codemirror/lang-javascript"]
 // const { tags: t } = CM['@lezer/highlight']
-export const { themeToExtension } = CM["@jeff-hykin/theme-tools"]
+import { basicSetup } from "./vendored/esm.sh/codemirror.js"
+import { EditorView, keymap } from "./vendored/esm.sh/@codemirror/view.js"
+import { EditorState, EditorSelection, Prec } from "./vendored/esm.sh/@codemirror/state.js"
+import { javascript } from "./vendored/esm.sh/@codemirror/lang-javascript.js"
+import { yaml } from "./vendored/esm.sh/@codemirror/lang-yaml.js"
+
+import { themeBuilderBuilder } from "./theme_tooling.js"
+import { tags } from "./vendored/esm.sh/@lezer/highlight.js"
+import { HighlightStyle, syntaxHighlighting } from "./vendored/esm.sh/@codemirror/language.js"
+export const themeToExtension = themeBuilderBuilder({ tags, EditorView, HighlightStyle, syntaxHighlighting })
 
 // at the moment: javascript, java, json, cpp, php, python, css, sass, html, sql, rust, xml, markdown, lezer, wast, angular, vue, liquid, less
-export const languages = Object.fromEntries(
-    Object.keys(CM).filter(each=>each.startsWith("@codemirror/lang-")).map(each=>{
-        const langName = each.replace(/^@codemirror\/lang-/,"")
-        return [langName, CM[each][langName]]
-    })
-)
+export const languages = {
+    javascript,
+    yaml,
+}
 
 const editorCssTag = `codmirror-${Math.random().toString(36).slice(2)}`
 if (document.head) {
