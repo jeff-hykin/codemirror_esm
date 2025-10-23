@@ -2,10 +2,10 @@
 
 Quick API
 ```js
-import { createEditor } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/helpers.js'
-import { javascript } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/lang-javascript.js'
-import { cpp } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/lang-cpp.js'
-import { yaml } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/lang-yaml.js'
+import { createEditor } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/helpers.js'
+import { javascript } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/lang-javascript.js'
+import { cpp } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/lang-cpp.js'
+import { yaml } from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/lang-yaml.js'
 
 // example1:
 const editor1 = createEditor()
@@ -40,16 +40,16 @@ const editor2 = createEditor({
 Full Codemirror API
 
 ```js
-import atomOne from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/themes/atomone.js'
-import dracula from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/themes/dracula.js'
+import atomOne from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/themes/atomone.js'
+import dracula from 'https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/themes/dracula.js'
 
-import { basicSetup } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/codemirror.js"
-import { EditorView, keymap } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/view.js"
-import { EditorState, Prec } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/state.js"
-import { javascript } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/@codemirror/lang-javascript.js"
+import { basicSetup } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/codemirror.js"
+import { EditorView, keymap } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/view.js"
+import { EditorState, Prec } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/state.js"
+import { javascript } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/@codemirror/lang-javascript.js"
 import { HighlightStyle, syntaxHighlighting } from "./vendored/esm.sh/@codemirror/language.js"
 
-import { themeToExtension, createEditor } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.4/helpers.js"
+import { themeToExtension, createEditor } from "https://cdn.jsdelivr.net/gh/jeff-hykin/codemirror_esm@1.0.0.5/helpers.js"
 
 const parent = document.createElement("div")
 let editor = new EditorView({
