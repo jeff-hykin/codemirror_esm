@@ -6,8 +6,8 @@ import { isPureObject } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0/sour
 import { basicSetup } from "./codemirror.js"
 import { EditorView, keymap } from "./@codemirror/view.js"
 import { EditorState, EditorSelection, Prec } from "./@codemirror/state.js"
-import { javascript } from "./@codemirror/lang-javascript.js"
-import { yaml } from "./@codemirror/lang-yaml.js"
+// import { javascript } from "./@codemirror/lang-javascript.js"
+// import { yaml } from "./@codemirror/lang-yaml.js"
 
 import { themeBuilderBuilder } from "./theme_tooling.js"
 import { tags } from "./@lezer/highlight.js"
@@ -16,10 +16,10 @@ import { HighlightStyle, syntaxHighlighting } from "./@codemirror/language.js"
 export const themeToExtension = themeBuilderBuilder({ tags, EditorView, HighlightStyle, syntaxHighlighting })
 
 // at the moment: javascript, java, json, cpp, php, python, css, sass, html, sql, rust, xml, markdown, lezer, wast, angular, vue, liquid, less
-export const languages = {
-    javascript,
-    yaml,
-}
+// export const languages = {
+//     javascript,
+//     yaml,
+// }
 
 const editorCssTag = `codmirror-${Math.random().toString(36).slice(2)}`
 if (document.head) {
@@ -38,7 +38,8 @@ if (document.head) {
  *
  * @example
  * ```js
- * import { createEditor, languages, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/helpers.js'
+ * import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/helpers.js'
+ * import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/lang-javascript.js'
  * 
  * // simple usage
  * const editor1 = createEditor()
@@ -47,7 +48,7 @@ if (document.head) {
  * // advanced usage
  * const editor2 = createEditor({
  *     style: "width:100%;height:100%",
- *     language: languages.javascript,
+ *     language: javascript,
  *     value: `console.log("Hello World!")`,
  *     onInput: ({element, editor}, update)=>{
  *         console.log("User added text!")

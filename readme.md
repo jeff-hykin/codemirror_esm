@@ -1,5 +1,42 @@
 ## Usage
 
+Quick API
+```js
+import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/helpers.js'
+import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/lang-javascript.js'
+
+// example1:
+const editor1 = createEditor()
+document.body.appendChild(editor1)
+
+// example2:
+const editor2 = createEditor({
+    style: "width:100%;height:100%",
+    language: javascript,
+    value: `console.log("Hello World!")`,
+    onInput: ({element, editor}, update)=>{
+        console.log("User added text!")
+        // set the editor's value
+        element.value = "Sorry I, if you edit anything you're going to only see this message"
+    },
+    keymaps: {
+        "Ctrl-Enter": ({element, editor}, ...other)=>{
+            console.log("User pressed Ctrl+Enter!")
+            let editorValue = element.value
+
+            // move cursor to end of document
+            const end = editor.state.doc.length;
+            editor.dispatch({
+                selection: EditorSelection.cursor(end)
+            })
+        },
+    },
+})
+```
+
+
+Full Codemirror API
+
 ```js
 import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/themes/atomone.js'
 import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/themes/dracula.js'
