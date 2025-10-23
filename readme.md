@@ -2,7 +2,7 @@
 
 ```js
 import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/main.js'
-import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/atom-one-dark.js'
+import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/atomone.js'
 import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.2.2/themes/dracula.js'
 
 const { basicSetup } = CM["codemirror"]
