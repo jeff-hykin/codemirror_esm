@@ -1,12 +1,11 @@
 import CM from './main.js'
 import atomOne from './themes/atomone.js'
 import { passAlongProps } from "https://esm.sh/gh/jeff-hykin/elemental@0.6.5/main/deno.js"
-import { LanguageSupport } from "./codemirror.js"
 import { isPureObject } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0/source/flattened/is_pure_object.js'
 
 export const { basicSetup } = CM["codemirror"]
 export const { EditorView, keymap } = CM["@codemirror/view"]
-export const { EditorState, Prec } = CM["@codemirror/state"]
+export const { EditorState, EditorSelection, Prec } = CM["@codemirror/state"]
 // const { javascript } = CM["@codemirror/lang-javascript"]
 // const { tags: t } = CM['@lezer/highlight']
 export const { themeToExtension } = CM["@jeff-hykin/theme-tools"]
@@ -19,12 +18,24 @@ export const languages = Object.fromEntries(
     })
 )
 
+const editorCssTag = `codmirror-${Math.random().toString(36).slice(2)}`
+if (document.head) {
+    document.head.appendChild(Object.assign(document.createElement("style"), {
+        innerHTML: `
+            .${editorCssTag} br {
+                display: inline-block;
+                content: "";
+                border-bottom: 0px solid transparent;
+            }
+        `,
+    }))
+}
 /**
  * createEditor returns an HTML element (div) with
  *
  * @example
  * ```js
- * import { createEditor, languages } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/helpers.js'
+ * import { createEditor, languages, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/helpers.js'
  * 
  * // simple usage
  * const editor1 = createEditor()
@@ -44,20 +55,39 @@ export const languages = Object.fromEntries(
  *         "Ctrl-Enter": ({element, editor}, ...other)=>{
  *             console.log("User pressed Ctrl+Enter!")
  *             let editorValue = element.value
+ * 
+ *             // move cursor to end of document
+ *             const end = editor.state.doc.length;
+ *             editor.dispatch({
+ *                 selection: EditorSelection.cursor(end)
+ *             })
  *         },
  *     },
  * })
  * ```
  */
-export function createEditor({ language, value, theme, editorState, keymaps, onInput, onChange, ...props } = {}) {
+export function createEditor({ language, value, theme, editorState, keymaps, onInput, onChange, disableHelpers=false, ...props } = {}) {
     const parent = document.createElement("div")
-    parent.style.position = "relative"
-    parent.addEventListener("click", (event)=>{
-        // TODO: ensure that this only activates if nothing else takes priority
-        if (parent.children.length > 0) {
-            parent.querySelector(".cm-scroller").focus()
-        }
-    })
+    parent.classList.add(editorCssTag)
+    if (!disableHelpers) {
+        value = value||' '
+        parent.style.position = "relative"
+        parent.addEventListener("click", (event)=>{
+            const elm = parent.querySelector(".cm-content")
+            if (elm) {
+                const bottomEdge = elm.clientTop + elm.clientHeight
+                elm.click()
+                elm.focus()
+                if (event.clientY > bottomEdge) {
+                    // move cursor to end of document if clicking below the last line
+                    const end = editor.state.doc.length;
+                    editor.dispatch({
+                        selection: EditorSelection.cursor(end)
+                    })
+                }
+            }
+        })
+    }
     let extensions = [
         basicSetup,
     ]
@@ -190,9 +220,11 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
             extensions,
         }),
     })
-
-    if (parent.children.length > 0) {
-        parent.children[0].style.minHeight = "100%"
+    
+    if (!disableHelpers) {
+        if (parent.children.length > 0) {
+            parent.children[0].style.minHeight = "100%"
+        }
     }
     return parent
 }
