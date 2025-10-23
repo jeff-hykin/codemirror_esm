@@ -2,8 +2,8 @@
 
 Quick API
 ```js
-import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/helpers.js'
-import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/@codemirror/lang-javascript.js'
+import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/helpers.js'
+import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/lang-javascript.js'
 
 // example1:
 const editor1 = createEditor()
@@ -38,16 +38,16 @@ const editor2 = createEditor({
 Full Codemirror API
 
 ```js
-import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/themes/atomone.js'
-import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/themes/dracula.js'
+import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/themes/atomone.js'
+import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/themes/dracula.js'
 
-import { basicSetup } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/codemirror.js"
-import { EditorView, keymap } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/@codemirror/view.js"
-import { EditorState, Prec } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/@codemirror/state.js"
-import { javascript } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/@codemirror/lang-javascript.js"
+import { basicSetup } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/codemirror.js"
+import { EditorView, keymap } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/view.js"
+import { EditorState, Prec } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/state.js"
+import { javascript } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/lang-javascript.js"
 import { HighlightStyle, syntaxHighlighting } from "./vendored/esm.sh/@codemirror/language.js"
 
-import { themeToExtension, createEditor } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.1/helpers.js"
+import { themeToExtension, createEditor } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/helpers.js"
 
 const parent = document.createElement("div")
 let editor = new EditorView({

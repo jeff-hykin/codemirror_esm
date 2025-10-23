@@ -5,7 +5,7 @@ import { isPureObject } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0/sour
 
 import { basicSetup } from "./codemirror.js"
 import { EditorView, keymap } from "./@codemirror/view.js"
-import { EditorState, EditorSelection, Prec } from "./@codemirror/state.js"
+import { EditorState, EditorSelection, Prec, Transaction } from "./@codemirror/state.js"
 // import { javascript } from "./@codemirror/lang-javascript.js"
 // import { yaml } from "./@codemirror/lang-yaml.js"
 
@@ -33,13 +33,22 @@ if (document.head) {
         `,
     }))
 }
+
+const errorToString = (error)=>{
+    if (error.message && error.stack) {
+        return error.message + "\n" + error.stack
+    } else if (error.message) {
+        return error.message
+    }
+    return String(error)
+}
 /**
  * createEditor returns an HTML element (div) with
  *
  * @example
  * ```js
- * import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/helpers.js'
- * import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/lang-javascript.js'
+ * import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/helpers.js'
+ * import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/lang-javascript.js'
  * 
  * // simple usage
  * const editor1 = createEditor()
@@ -135,11 +144,11 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
                             let result = value({element: parent, editor}, ...args)
                             if (result instanceof Promise) {
                                 result.catch((error)=>{
-                                    console.error(error?.stack||error)
+                                    console.error(errorToString(error))
                                 })
                             }
                         } catch (error) {
-                            console.error(error?.stack||error)
+                            console.error(errorToString(error))
                             return false
                         }
                         return true
@@ -159,11 +168,11 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
                         let result = onInput({element: parent, editor}, update)
                         if (result instanceof Promise) {
                             result.catch((error)=>{
-                                console.error(error?.stack||error)
+                                console.error(errorToString(error))
                             })
                         }
                     } catch (error) {
-                        console.error(error?.stack||error)
+                        console.error(errorToString(error))
                     }
                 }
             })
@@ -181,11 +190,11 @@ export function createEditor({ language, value, theme, editorState, keymaps, onI
                         let result = onChange({element: parent, editor}, update)
                         if (result instanceof Promise) {
                             result.catch((error)=>{
-                                console.error(error?.stack||error)
+                                console.error(errorToString(error))
                             })
                         }
                     } catch (error) {
-                        console.error(error?.stack||error)
+                        console.error(errorToString(error))
                     }
                 }
             })
