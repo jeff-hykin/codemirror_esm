@@ -40,6 +40,45 @@ for (const each of [
     'https://esm.sh/@codemirror/lang-wast?dev',
     'https://esm.sh/@codemirror/lang-xml?dev',
     'https://esm.sh/@codemirror/lang-yaml?dev',
+    // fallbacks
+        'https://esm.sh/@codemirror/legacy-modes/mode/stex',
+        'https://esm.sh/@codemirror/legacy-modes/mode/lua',
+        'https://esm.sh/@codemirror/legacy-modes/mode/ruby',
+        'https://esm.sh/@codemirror/legacy-modes/mode/cmake',
+        'https://esm.sh/@codemirror/legacy-modes/mode/cobol',
+        'https://esm.sh/@codemirror/legacy-modes/mode/coffeescript',
+        'https://esm.sh/@codemirror/legacy-modes/mode/commonlisp',
+        'https://esm.sh/@codemirror/legacy-modes/mode/crystal',
+        'https://esm.sh/@codemirror/legacy-modes/mode/dockerfile',
+        'https://esm.sh/@codemirror/legacy-modes/mode/elm',
+        'https://esm.sh/@codemirror/legacy-modes/mode/erlang',
+        'https://esm.sh/@codemirror/legacy-modes/mode/fortran',
+        'https://esm.sh/@codemirror/legacy-modes/mode/gherkin',
+        'https://esm.sh/@codemirror/legacy-modes/mode/go',
+        'https://esm.sh/@codemirror/legacy-modes/mode/haskell',
+        'https://esm.sh/@codemirror/legacy-modes/mode/haxe',
+        'https://esm.sh/@codemirror/legacy-modes/mode/http',
+        'https://esm.sh/@codemirror/legacy-modes/mode/julia',
+        'https://esm.sh/@codemirror/legacy-modes/mode/mathematica',
+        'https://esm.sh/@codemirror/legacy-modes/mode/nginx',
+        'https://esm.sh/@codemirror/legacy-modes/mode/pascal',
+        'https://esm.sh/@codemirror/legacy-modes/mode/pegjs',
+        'https://esm.sh/@codemirror/legacy-modes/mode/perl',
+        'https://esm.sh/@codemirror/legacy-modes/mode/pig',
+        'https://esm.sh/@codemirror/legacy-modes/mode/powershell',
+        'https://esm.sh/@codemirror/legacy-modes/mode/protobuf',
+        'https://esm.sh/@codemirror/legacy-modes/mode/puppet',
+        'https://esm.sh/@codemirror/legacy-modes/mode/r',
+        'https://esm.sh/@codemirror/legacy-modes/mode/scheme',
+        'https://esm.sh/@codemirror/legacy-modes/mode/shell',
+        'https://esm.sh/@codemirror/legacy-modes/mode/smalltalk',
+        'https://esm.sh/@codemirror/legacy-modes/mode/sparql',
+        'https://esm.sh/@codemirror/legacy-modes/mode/swift',
+        'https://esm.sh/@codemirror/legacy-modes/mode/textile',
+        'https://esm.sh/@codemirror/legacy-modes/mode/toml',
+        'https://esm.sh/@codemirror/legacy-modes/mode/vb',
+        'https://esm.sh/@codemirror/legacy-modes/mode/vbscript',
+        'https://esm.sh/@codemirror/legacy-modes/mode/verilog',
     // extras
         'https://esm.sh/@replit/codemirror-lang-svelte?dev',
         'https://esm.sh/@replit/codemirror-lang-nix?dev',
@@ -79,6 +118,23 @@ await FileSystem.write({path:`${FileSystem.thisFolder}/../vendored/node.js/proce
 // 
 // generate helper folders
 // 
+for (const eachGroup of ["@codemirror/legacy-modes/mode"]) {
+    var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/${eachGroup}`)
+    var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
+    for (let each of names) {
+        try {
+            const exportedThings = await import(`${FileSystem.thisFolder}/../vendored/esm.sh/${eachGroup}/${each}.js`)
+            const keys = Object.keys(exportedThings).filter(each=>each != "default")
+            await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `
+                import { StreamLanguage } from "./language.js"
+                import {${keys.map(eachKey=>`${eachKey} as _${eachKey}`).join(", ")}} from "./${each}.js"
+                ${keys.map(each=>`export const ${each} = StreamLanguage.define(_${each})`).join("\n")}
+            `.trim().replace(/\n\s+/g,"\n"), overwrite: true})
+        } catch (error) {
+            console.warn(error)
+        }
+    }
+}
 for (const eachGroup of ["@codemirror","@lezer","@replit","@langchain","@cookshack"]) {
     var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/${eachGroup}`)
     var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
