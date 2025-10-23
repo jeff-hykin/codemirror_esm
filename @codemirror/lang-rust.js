@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lang-rust.js"
+export * from "../vendored/esm.sh/@codemirror/lang-rust.js"

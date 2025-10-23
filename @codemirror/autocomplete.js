@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/autocomplete.js"
+export * from "../vendored/esm.sh/@codemirror/autocomplete.js"

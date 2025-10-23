@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lang-python.js"
+export * from "../vendored/esm.sh/@codemirror/lang-python.js"

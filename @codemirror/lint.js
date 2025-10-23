@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lint.js"
+export * from "../vendored/esm.sh/@codemirror/lint.js"

@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lang-php.js"
+export * from "../vendored/esm.sh/@codemirror/lang-php.js"

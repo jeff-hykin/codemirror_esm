@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@lezer/common.js"
+export * from "../vendored/esm.sh/@lezer/common.js"

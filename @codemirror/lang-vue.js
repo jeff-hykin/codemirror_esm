@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lang-vue.js"
+export * from "../vendored/esm.sh/@codemirror/lang-vue.js"

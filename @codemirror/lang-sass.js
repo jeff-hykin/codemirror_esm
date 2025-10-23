@@ -1,1 +1,1 @@
-export * from "./vendored/esm.sh/@codemirror/lang-sass.js"
+export * from "../vendored/esm.sh/@codemirror/lang-sass.js"
