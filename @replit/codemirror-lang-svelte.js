@@ -1,0 +1,1 @@
+export * from "../vendored/esm.sh/@replit/codemirror-lang-svelte.js"
