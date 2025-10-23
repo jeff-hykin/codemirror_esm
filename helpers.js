@@ -47,8 +47,8 @@ const errorToString = (error)=>{
  *
  * @example
  * ```js
- * import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/helpers.js'
- * import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.2/@codemirror/lang-javascript.js'
+ * import { createEditor, EditorSelection } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.3/helpers.js'
+ * import { javascript } from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.3/@codemirror/lang-javascript.js'
  * 
  * // simple usage
  * const editor1 = createEditor()
