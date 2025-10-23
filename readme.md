@@ -1,18 +1,16 @@
 ## Usage
 
 ```js
-import CM from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/main.js'
-import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/themes/atomone.js'
-import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@0.0.3.0/themes/dracula.js'
+import atomOne from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/themes/atomone.js'
+import dracula from 'https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/themes/dracula.js'
 
-const { basicSetup } = CM["codemirror"]
-const { EditorView, keymap } = CM["@codemirror/view"]
-const { EditorState, Prec } = CM["@codemirror/state"]
-const { javascript } = CM["@codemirror/lang-javascript"]
-const { tags: t } = CM['@lezer/highlight']
-const { themeToExtension } = CM["@jeff-hykin/theme-tools"]
+import { basicSetup } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/codemirror.js"
+import { EditorView, keymap } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/view.js"
+import { EditorState, Prec } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/state.js"
+import { javascript } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/@codemirror/lang-javascript.js"
+import { HighlightStyle, syntaxHighlighting } from "./vendored/esm.sh/@codemirror/language.js"
 
-//  NOTE: all of @uiw/codemirror-theme's have been ported to ./themes
+import { themeToExtension, createEditor } from "https://esm.sh/gh/jeff-hykin/codemirror_esm@1.0.0.0/helpers.js"
 
 const parent = document.createElement("div")
 let editor = new EditorView({
@@ -91,42 +89,4 @@ let editor = new EditorView({
         ],
     }),
 })
-```
-
-
-## Whats Available?
-
-```js
-CM["@lezer/lr"]
-CM["@lezer/common"]
-CM["@lezer/highlight"]
-CM["@codemirror/state"]
-CM["@codemirror/view"]
-CM["@codemirror/merge"]
-CM["@codemirror/language"]
-CM["@codemirror/commands"]
-CM["@codemirror/search"]
-CM["@codemirror/autocomplete"]
-CM["@codemirror/lint"]
-CM["@codemirror/collab"]
-CM["@codemirror/theme-one-dark"]
-CM["@codemirror/lang-javascript"]
-CM["@codemirror/lang-java"]
-CM["@codemirror/lang-json"]
-CM["@codemirror/lang-cpp"]
-CM["@codemirror/lang-php"]
-CM["@codemirror/lang-python"]
-CM["@codemirror/lang-css"]
-CM["@codemirror/lang-sass"]
-CM["@codemirror/lang-html"]
-CM["@codemirror/lang-sql"]
-CM["@codemirror/lang-rust"]
-CM["@codemirror/lang-xml"]
-CM["@codemirror/lang-markdown"]
-CM["@codemirror/lang-lezer"]
-CM["@codemirror/lang-wast"]
-CM["@codemirror/lang-angular"]
-CM["@codemirror/lang-vue"]
-CM["@codemirror/lang-liquid"]
-CM["@codemirror/lang-less"]
 ```

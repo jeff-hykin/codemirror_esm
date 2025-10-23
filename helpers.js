@@ -3,20 +3,16 @@ import atomOne from './themes/atomone.js'
 import { passAlongProps } from "https://esm.sh/gh/jeff-hykin/elemental@0.6.5/main/deno.js"
 import { isPureObject } from 'https://esm.sh/gh/jeff-hykin/good-js@1.18.2.0/source/flattened/is_pure_object.js'
 
-// export const { basicSetup } = CM["codemirror"]
-// export const { EditorView, keymap } = CM["@codemirror/view"]
-// export const { EditorState, EditorSelection, Prec } = CM["@codemirror/state"]
-// const { javascript } = CM["@codemirror/lang-javascript"]
-// const { tags: t } = CM['@lezer/highlight']
-import { basicSetup } from "./vendored/esm.sh/codemirror.js"
-import { EditorView, keymap } from "./vendored/esm.sh/@codemirror/view.js"
-import { EditorState, EditorSelection, Prec } from "./vendored/esm.sh/@codemirror/state.js"
-import { javascript } from "./vendored/esm.sh/@codemirror/lang-javascript.js"
-import { yaml } from "./vendored/esm.sh/@codemirror/lang-yaml.js"
+import { basicSetup } from "./codemirror.js"
+import { EditorView, keymap } from "./@codemirror/view.js"
+import { EditorState, EditorSelection, Prec } from "./@codemirror/state.js"
+import { javascript } from "./@codemirror/lang-javascript.js"
+import { yaml } from "./@codemirror/lang-yaml.js"
 
 import { themeBuilderBuilder } from "./theme_tooling.js"
-import { tags } from "./vendored/esm.sh/@lezer/highlight.js"
-import { HighlightStyle, syntaxHighlighting } from "./vendored/esm.sh/@codemirror/language.js"
+import { tags } from "./@lezer/highlight.js"
+import { HighlightStyle, syntaxHighlighting } from "./@codemirror/language.js"
+
 export const themeToExtension = themeBuilderBuilder({ tags, EditorView, HighlightStyle, syntaxHighlighting })
 
 // at the moment: javascript, java, json, cpp, php, python, css, sass, html, sql, rust, xml, markdown, lezer, wast, angular, vue, liquid, less
