@@ -3,7 +3,10 @@ import { recursivelyVendor } from "../utils/vendor.js"
 import { FileSystem, glob } from "https://deno.land/x/quickr@0.8.6/main/file_system.js"
 
 for (const each of [
+    'https://esm.sh/@lezer/lr?dev',
+    'https://esm.sh/@lezer/common?dev',
     'https://esm.sh/@lezer/highlight?dev',
+
     'https://esm.sh/codemirror?dev',
     'https://esm.sh/@codemirror/state?dev',
     'https://esm.sh/@codemirror/view?dev',
@@ -45,3 +48,23 @@ for (const each of [
 }
 
 await FileSystem.write({path:`${FileSystem.thisFolder}/../vendored/node.js/process.js`, data: `export default { argv: ["","",], }`, overwrite: true})
+
+
+// 
+// generate codemirror folder
+// 
+var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/@codemirror`)
+var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
+
+Deno.mkdirSync(`./@codemirror/`, { recursive: true })
+for (let each of names) {
+    await FileSystem.write({path:`${FileSystem.thisFolder}/../@codemirror/${each}.js`, data: `export * from "./vendored/esm.sh/@codemirror/${each}.js"`, overwrite: true})
+}
+
+var items = await FileSystem.listFileItemsIn(`${FileSystem.thisFolder}/../vendored/esm.sh/@lezer`)
+var names = items.filter(each=>!each.name.includes("@")).map(each=>each.name)
+
+Deno.mkdirSync(`./@lezer/`, { recursive: true })
+for (let each of names) {
+    await FileSystem.write({path:`${FileSystem.thisFolder}/../@lezer/${each}.js`, data: `export * from "./vendored/esm.sh/@lezer/${each}.js"`, overwrite: true})
+}
