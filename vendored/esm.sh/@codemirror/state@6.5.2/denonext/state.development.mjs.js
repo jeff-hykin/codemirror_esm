@@ -1043,9 +1043,9 @@ function Ue(s, e, t) {
             if (t.has(l.compartment)) throw new RangeError("Duplicate use of compartment in extensions")
             let a = e.get(l.compartment) || l.inner
             t.set(l.compartment, a), r(a, h)
-        } else if (l instanceof te || (l?.inner && l?.prec)) r(l.inner, l.prec)
-        else if (l instanceof q || l?.compareF) n[h].push(l), l.provides && r(l.provides, h)
-        else if (l instanceof D || l?.facet) n[h].push(l), l.facet.extensions && r(l.facet.extensions, b.default)
+        } else if (l instanceof te) r(l.inner, l.prec)
+        else if (l instanceof q) n[h].push(l), l.provides && r(l.provides, h)
+        else if (l instanceof D || l?.facet?.id) n[h].push(l), l.facet.extensions && r(l.facet.extensions, b.default)
         else {
             let a = l.extension
             if (!a) {
