@@ -70,7 +70,7 @@ for (const each of [
         'https://esm.sh/@codemirror/legacy-modes/mode/puppet',
         'https://esm.sh/@codemirror/legacy-modes/mode/r',
         'https://esm.sh/@codemirror/legacy-modes/mode/scheme',
-        'https://esm.sh/@codemirror/legacy-modes/mode/shell',
+        // 'https://esm.sh/@codemirror/legacy-modes/mode/shell',
         'https://esm.sh/@codemirror/legacy-modes/mode/smalltalk',
         'https://esm.sh/@codemirror/legacy-modes/mode/sparql',
         'https://esm.sh/@codemirror/legacy-modes/mode/swift',
@@ -100,6 +100,7 @@ for (const each of [
         // 'https://esm.sh/codemirror-lang-mermaid?dev',
         // 'https://esm.sh/codemirror-lang-spreadsheet?dev',
         // 'https://esm.sh/codemirror-lang-r?dev',
+        'https://esm.sh/@fig/lezer-bash?dev',
 
     'https://esm.sh/@codemirror/theme-one?dev',
     'https://esm.sh/@codemirror/merge?dev',
